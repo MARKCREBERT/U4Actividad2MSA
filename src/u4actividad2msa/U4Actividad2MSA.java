@@ -21,7 +21,7 @@ public class U4Actividad2MSA {
     
     public void inicio() {
        
-        
+        // comentario
         
     }
     
