@@ -5,6 +5,8 @@
  */
 package u4actividad2msa;
 
+import java.util.Random;
+
 /**
  *
  * @author ciclost
@@ -20,8 +22,14 @@ public class U4Actividad2MSA {
     }
     
     public void inicio() {
-       
+        
         paloAleatorioDominante();
+        
+        int [][] baraja = new int [4][12];
+        
+        repartirCartas(baraja, 1); // poniendo el 1, llamamos al jugador 1
+        
+        
         
         
     }
@@ -52,15 +60,53 @@ public class U4Actividad2MSA {
             System.out.println("Palo dominante => Copas");
         }
         
+        
        return paloElegido;
 
     }
   
     
     
-    public String repartirCartas() {     
+    public int[][] repartirCartas(int baraja[][], int numJugador) {   
         
-        return null;
+        Random random = new Random(); // random sería un objeto
+        
+        int filas = 0;
+        int columnas = 0;
+        int jugador = numJugador;
+        
+        
+        int [][] colFil = new int [4][12]; // así llenamos el array
+        
+        for (int j = 0; j < 4; j++) {
+            
+        for (int i = 0; i < 4; i++) {
+              
+               filas = random.nextInt(4);  // crea valores enteros entre el 0 y el 4
+               columnas = random.nextInt(12); // crea valores enteros entre el 0 y el 11
+               
+               // este if es para que no chafe un numero a otro
+               if(colFil[filas][columnas] == 0) {
+               colFil[filas][columnas] = j+1; //para que en cada iteracion sume un jugador, porque sino j empieza en 0, y no debe haber un jugador que sea 0
+               }
+               else{i--;}// ccuando no sea 0 se va hacia atrás para compensar la carta que no ha puesto
+               
+               
+        }}
+        
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 12; j++) {
+                
+                System.out.print(colFil[i][j]);
+                
+            }
+            
+            System.out.println("");
+        }
+        
+        // ahora sería asignar el valor en otro método, por ejemplo asignar valor a las cartas, que busque posicion, si hay un 0 que asigne, sino no
+        
+        return colFil;
 
     }
     
