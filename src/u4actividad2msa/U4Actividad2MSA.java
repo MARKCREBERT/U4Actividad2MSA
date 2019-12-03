@@ -6,7 +6,7 @@
 package u4actividad2msa;
 
 import java.util.Random;
-
+import java.util.Scanner;
 /**
  *
  * @author ciclost
@@ -22,8 +22,10 @@ public class U4Actividad2MSA {
     }
 
     public void inicio() {
+        
+        char palo;
 
-        paloAleatorioDominante();
+        palo = paloAleatorioDominante();
 
         int[][] baraja = new int[4][12];
         String[][] cartas = new String[4][4];
@@ -38,17 +40,9 @@ public class U4Actividad2MSA {
         
         System.out.println("\n");
         
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-
-                System.out.print(cartas[i][j]);
-
-            }
-            System.out.print("\n");
-        }
+        eleccionJugador(cartas,palo);
         
         
-
     }
 
     public char paloAleatorioDominante() {
@@ -59,19 +53,26 @@ public class U4Actividad2MSA {
         char paloElegido = (char) paloAleatorio;
 
         if (paloElegido == '1') {
+            
+            paloElegido = 'B';
 
             System.out.println("Palo dominante => Bastos");
 
         } else if (paloElegido == '2') {
+            
+            paloElegido = 'E';
 
             System.out.println("Palo dominante => Espadas");
 
         } else if (paloElegido == '3') {
+            
+            paloElegido = 'O';
 
             System.out.println("Palo dominante => Oros");
 
         } else if (paloElegido == '4') {
-
+            
+            paloElegido = 'C';
             System.out.println("Palo dominante => Copas");
         }
         
@@ -226,7 +227,7 @@ public class U4Actividad2MSA {
 
         switch (j) {
 
-            case 1: // el AS
+            case 0: // el AS
 
                 carta = "A";
 
@@ -256,7 +257,7 @@ public class U4Actividad2MSA {
 
             case 0: // Oros
 
-                carta = carta.concat("0");
+                carta = carta.concat("O");
 
                 break;
 
@@ -283,14 +284,67 @@ public class U4Actividad2MSA {
         return carta;
     }
 
-    public String eleccionJugador() {
+    public String [][] eleccionJugador(String [][]cartas, char palo) { // se pone String [][] -> porque arriba en inicio, el String cartas es bidimensaional
+        
+        String[] usuario = new String[4];
+        Scanner teclado = new Scanner (System.in);
+        boolean ganador [] = new boolean[4];
+        
+        
+        for (int i = 0; i < 4; i++) { // bucle para las filas
+            
+            System.out.print("Cartas Jugador " + (i+1) + ": ");
+            
+
+            for (int j = 0; j < 4; j++) { // bucle para las columnas
+                
+                System.out.print(cartas[i][j] + " |");
+                
+                
+            }
+            
+            System.out.print("\n");
+            System.out.print("¿Qué carta lanzas?: ");
+            usuario[i] = teclado.nextLine();
+
+            
+        }
+        
+           ganador = decidirGanador(usuario,palo);
+            
+            System.out.print("\n");
+            
+            for (int j = 0; j < ganador.length; j++) {
+                
+                
+                if (ganador[j] == true) {
+                    
+                    System.out.println("El jugador " + (j+1) + " gana la partida");
+                    
+                }
+                
+            }
 
         return null;
     }
 
-    public String visionCartasDelJugador() {
+    public boolean [] decidirGanador(String[] usuario, char palo) {
+        
+        char paloCarta;
+        boolean ganadores [] = new boolean[4];
+        
+        for (int i = 0; i < 4; i++) {
+            
+            paloCarta = usuario[i].charAt(1); // para sacar la la segunda posición, que en este caso es la que nos importa, para saber el palo dominante de cada jugador
+            
+            if (paloCarta == palo) {
+                
+                ganadores[i] = true;
+            } 
+        }
+            
 
-        return null;
+        return ganadores;
     }
 
     public String ganadorDeLaPartida() {
@@ -340,3 +394,5 @@ En casa FIle -> Import
 
 
 /*remote-> git push y en casa git pull*/
+
+// crear uno privado y meter a ROberto como colaborador
